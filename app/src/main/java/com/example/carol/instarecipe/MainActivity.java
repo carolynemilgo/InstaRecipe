@@ -11,21 +11,29 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity {
 //declare member variables(for the views-textview,editview and button) and define it at runtime in the onCreate method
-
-    private TextView mIntroMessage;
-    private Button mFindRecipesButton;
-    private ImageView mWelcomePage;
-    private EditText mEditTextView;
+    //use butterknife to bind them
+    @Bind(R.id.findRecipesButton) Button mFindRecipesButton;
+    @Bind(R.id.editTextView) EditText mEditTextView;
+    @Bind(R.id.welcomePage) ImageView mWelcomePage;
+    @Bind(R.id.introMessage)TextView mIntroMessage;
+    //private TextView mIntroMessage;
+    //private Button mFindRecipesButton;
+    //private ImageView mWelcomePage;
+    //private EditText mEditTextView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
-        mIntroMessage=(TextView) findViewById(R.id.introMessage);
+        //mIntroMessage=(TextView) findViewById(R.id.introMessage);
 
         //define the font as type Typeface
         Typeface ralewayFont=Typeface.createFromAsset(getAssets(),"fonts/Raleway-ExtraLight.ttf");
@@ -33,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         //mFindRecipesButton.setTypeface(ralewayFont);
 
         //adding a toast to the main image on the home page using click listeners
-        mWelcomePage=(ImageView) findViewById(R.id.welcomePage);
+        //mWelcomePage=(ImageView) findViewById(R.id.welcomePage);
         mWelcomePage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View imageView) {
@@ -44,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
         //adding a click listener to the button
         //mFindRecipesButton=(Button) findViewById(R.id.findRecipesButton);
        // mFindRecipesButton.setOnClickListener(new View.OnClickListener(){
-        mEditTextView=(EditText) findViewById(R.id.editTextView);
-        mFindRecipesButton=(Button) findViewById(R.id.findRecipesButton);
+        //mEditTextView=(EditText) findViewById(R.id.editTextView);
+        //mFindRecipesButton=(Button) findViewById(R.id.findRecipesButton);
         mFindRecipesButton.setOnClickListener(new View.OnClickListener(){
            @Override
            public void onClick(View v){
