@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.carol.instarecipe.MainActivity"
+    >
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/welcomePage"
+        android:src="@drawable/bowl"
+        android:layout_alignBottom="@+id/findRecipesButton"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Once Upon a Kitchen!"
+        android:layout_gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="15dp"
+        android:textSize="35sp"
+        android:id="@+id/introMessage"
+
+        />
+
+    <EditText
+        android:id="@+id/editTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/findRecipesButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="21dp"
+        android:textSize="23sp"
+        android:hint="Enter your name"
+        android:textColor="@color/colorWhite"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/findRecipesButton"
+        android:text="Find Recipes"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:textSize="23sp"
+        android:background="@color/colorAccent"
+        android:fontFamily="sans-serif"
+        android:height="60dp"
+        />
+
+</RelativeLayout>
