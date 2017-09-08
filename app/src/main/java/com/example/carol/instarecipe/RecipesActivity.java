@@ -17,7 +17,7 @@ public class RecipesActivity extends AppCompatActivity {
 
         Intent findRecipes=getIntent();
         String guestName=findRecipes.getStringExtra("guestName");
-        mRecipeTextView.setText("Hello " +guestName+".We invite you to savour our delicious recipes");
+        mRecipeTextView.setText("Hello " +guestName+".We invite you to savour our delicious recipes!");
     }
 }
 
