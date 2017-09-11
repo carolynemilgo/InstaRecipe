@@ -5,6 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
     tools:context="com.example.carol.instarecipe.RecipesActivity">
     <TextView
         android:layout_width="wrap_content"
@@ -14,40 +18,34 @@
         android:textSize="16sp"
         android:textAlignment="center"
         />
-    <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/listMessage"-->
-
-        <!--/>-->
-
-
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/mashed"
-            />
-        <TextView
-            android:layout_width="150dp"
-            android:layout_height="80dp"
-            android:text="Blah blah!"/>
-
-    <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:orientation="horizontal"-->
-        <!--&gt;-->
-        <!--<ImageView-->
-            <!--android:layout_width="80dp"-->
-            <!--android:layout_height="80dp"-->
-            <!--android:src="@drawable/mashed"-->
-            <!--/>-->
-        <!--<TextView-->
-            <!--android:layout_width="150dp"-->
-            <!--android:layout_height="80dp"-->
-            <!--android:text="Blah blah!"/>-->
-
-    <!--</LinearLayout>-->
-
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recyclerView"
+    android:scrollbars="vertical"/>
+    <ImageView
+        android:id="@+id/item_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:adjustViewBounds="true"
+        android:layout_weight="3"/>
+    <TextView
+        android:id="@+id/item_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_gravity="top|start"
+        android:layout_weight="1"
+        android:text="Some date"/>
+    <TextView
+        android:id="@+id/item_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|start"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:maxLines="5"/>
 
 </LinearLayout>
