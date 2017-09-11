@@ -49,11 +49,12 @@ public class MainActivity extends AppCompatActivity {
             }
         })  ;
 
-        //adding a click listener to the button
+
         //mFindRecipesButton=(Button) findViewById(R.id.findRecipesButton);
        // mFindRecipesButton.setOnClickListener(new View.OnClickListener(){
         //mEditTextView=(EditText) findViewById(R.id.editTextView);
         //mFindRecipesButton=(Button) findViewById(R.id.findRecipesButton);
+        //adding a click listener to the button
         mFindRecipesButton.setOnClickListener(new View.OnClickListener(){
            @Override
            public void onClick(View v){
