@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.carol.instarecipe.R;
 import com.example.carol.instarecipe.Recipe;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -71,6 +72,10 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         }
 
         public void bindRecipe(Recipe recipe){
+
+            //allow picasso to handle the image loading
+        Picasso.with(mContext).load(recipe.getImageUrl()).into(mRecipeImageView);
+
         mNameTextView.setText(recipe.getRecipeName());
         mRatingTextView.setText("Rating:"+ recipe.getRating() +"/5");
         mPrepTimeTextView.setText(recipe.getPrepTime() + "Mins");

@@ -28,7 +28,7 @@ public class Recipe {
         return mRecipeName;
     }
 
-    public String getmImageUrl() {
+    public String getImageUrl() {
         return mImageUrl;
     }
 

@@ -20,8 +20,8 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class RecipesActivity extends AppCompatActivity {
-    public static final String TAG = RecipesActivity.class.getSimpleName();
+public class RecipeListActivity extends AppCompatActivity {
+    public static final String TAG = RecipeListActivity.class.getSimpleName();
 
 
     private Button mSubmitRecipeButton;
@@ -61,7 +61,7 @@ public class RecipesActivity extends AppCompatActivity {
 //            @Override
 //            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 //                String restaurant = ((TextView) view).getText().toString();
-//                Toast.makeText(RecipesActivity.this, restaurant, Toast.LENGTH_LONG).show();
+//                Toast.makeText(RecipeListActivity.this, restaurant, Toast.LENGTH_LONG).show();
 //            }
 //        });
         getRecipes(recipes);
@@ -84,13 +84,13 @@ public class RecipesActivity extends AppCompatActivity {
             public void onResponse(Call call, Response response) {
                 mRecipes = yummlyService.processResults(response);
 
-                RecipesActivity.this.runOnUiThread(new Runnable() {
+                RecipeListActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
 
                         mAdapter=new RecipeListAdapter(getApplicationContext(),mRecipes);
                         mRecyclerView.setAdapter(mAdapter);
-                        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(RecipesActivity.this);
+                        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(RecipeListActivity.this);
                         mRecyclerView.setLayoutManager(layoutManager);
                         mRecyclerView.setHasFixedSize(true);
 
@@ -100,7 +100,7 @@ public class RecipesActivity extends AppCompatActivity {
 //                            recipeNames[i] = mRecipes.get(i).getRecipeName();
 //                        }
 //                        //create an array adapter to pass data into the view
-//                        ArrayAdapter adapter = new ArrayAdapter(RecipesActivity.this,
+//                        ArrayAdapter adapter = new ArrayAdapter(RecipeListActivity.this,
 //                                android.R.layout.simple_list_item_1, recipeNames);
 //                        mListView.setAdapter(adapter);
 //                        for(Recipe recipe: mRecipes){
