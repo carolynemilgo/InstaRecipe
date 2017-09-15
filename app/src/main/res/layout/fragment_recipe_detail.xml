@@ -14,7 +14,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="180dp"
-            android:id="@+id/restaurantImageView"
+            android:id="@+id/recipeImageView"
             android:src="@drawable/nyam"
             android:scaleType="centerCrop" />
 
@@ -59,7 +59,8 @@
                 android:layout_alignParentStart="true"
                 android:textColor="@color/colorAccent"
                 android:textStyle="italic" />
-        </RelativeLayout>
+
+                </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -72,7 +73,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_above="@+id/saveRecipeButton"
+                android:layout_above="@+id/recipeImageView"
                 android:paddingLeft="30dp"
                 android:paddingTop="20dp"
                 android:paddingRight="30dp">
@@ -82,8 +83,7 @@
                     android:layout_height="wrap_content"
                     android:text="View on Yummly"
                     android:id="@+id/websiteTextView"
-                    android:drawableLeft="@drawable/ic_exit_to_app_white_24dp"
-                    android:drawablePadding="4dp"
+                                        android:drawablePadding="4dp"
                     android:textColor="@color/colorAccent"
                     android:textSize="15sp"
                     android:textStyle="bold"

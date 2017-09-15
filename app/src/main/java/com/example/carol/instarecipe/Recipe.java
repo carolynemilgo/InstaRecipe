@@ -1,11 +1,13 @@
 package com.example.carol.instarecipe;
 
+import org.parceler.Parcel;
+
 import java.util.ArrayList;
 
 /**
  * Created by carol on 9/14/17.
  */
-
+@Parcel
 public class Recipe {
     private String mRecipeName;
     //private String  mId;
@@ -14,6 +16,8 @@ public class Recipe {
     private String mImageUrl;
     private int mPrepTime;
 
+
+    public Recipe() {}
 
     public Recipe(String recipeName, ArrayList<String> ingredients, double rating, String imageUrl, int prepTime) {
         this.mRecipeName = recipeName;

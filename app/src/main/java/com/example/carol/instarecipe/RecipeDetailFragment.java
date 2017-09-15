@@ -6,6 +6,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+
+import org.parceler.Parcels;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 
 /**
@@ -13,17 +22,48 @@ import android.view.ViewGroup;
  */
 public class RecipeDetailFragment extends Fragment {
 
+    @Bind(R.id.recipeImageView)
+    ImageView mImageLabel;
+    @Bind(R.id.recipeNameTextView)
+    TextView mRecipeNameLabel;
+    @Bind(R.id.ratingTextView) TextView mRatingLabel;
+    @Bind(R.id.prepTimeTextView) TextView mPrepTimeLabel;
+   // @Bind(R.id.websiteTextView) TextView mWebsiteLabel;
 
-    public RecipeDetailFragment() {
-        // Required empty public constructor
-    }
+
+    private  Recipe mRecipe;
 
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_recipe_detail, container, false);
+    public static RecipeDetailFragment newInstance(Recipe recipe) {
+        RecipeDetailFragment recipeDetailFragment=new RecipeDetailFragment();
+        Bundle args=new Bundle();
+        args.putParcelable("recipe", Parcels.wrap(recipe));
+        recipeDetailFragment.setArguments(args);
+        return recipeDetailFragment;
+            }
+
+
+            @Override
+            public void onCreate(Bundle savedInstanceState){
+                super.onCreate(savedInstanceState);
+                mRecipe=Parcels.unwrap(getArguments().getParcelable("recipe"));
+            }
+
+            @Override
+            public View onCreateView(LayoutInflater inflater, ViewGroup container,
+             Bundle savedInstanceState) {
+                View view = inflater.inflate(R.layout.fragment_recipe_detail, container, false);
+                ButterKnife.bind(this, view);
+                Picasso.with(view.getContext()).load(mRecipe.getImageUrl()).into(mImageLabel);
+
+//                mImageLabel.setText(mRecipe.getImageUrl());
+                mPrepTimeLabel.setText(mRecipe.getPrepTime());
+                mRatingLabel.setText(Double.toString(mRecipe.getRating()) + "/5");
+                //mWebsiteLabel.setText(mRecipe.getWebAddress());
+                mRecipeNameLabel.setText(mRecipe.getRecipeName());
+
+
+        return view;
     }
 
 }
