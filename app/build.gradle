@@ -39,4 +39,5 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.2.0'//Included OKHTTP dependency -a networking library
     compile 'se.akerfeldt:okhttp-signpost:1.1.0' //Included OKHTTP dependency -a networking library
     compile 'com.android.support:recyclerview-v7:+'//recyler view support library
+    compile 'com.squareup.picasso:picasso:2.5.2'//adding picasso as a dependency for the images
 }

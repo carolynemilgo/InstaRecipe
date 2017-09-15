@@ -34,6 +34,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
 //create the methods required by the RecycleViewAdapter
 
     @Override
+    //method creates the ViewHolder object required from the adapter and inflates the layout
     public RecipeListAdapter.RecipeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recipe_list_item, parent, false);
         RecipeViewHolder viewHolder = new RecipeViewHolder(view);
@@ -41,19 +42,16 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
     }
 
     @Override
+    //updates the contents of the itemView to represent a recipe at a given position
     public void onBindViewHolder(RecipeListAdapter.RecipeViewHolder holder, int position) {
         holder.bindRecipe(mRecipes.get(position));
     }
 
     @Override
+    //sets the number of items the adapter will display
     public int getItemCount() {
         return mRecipes.size();
     }
-
-
-
-
-
     //create a nested class which is our view holder
     public class RecipeViewHolder extends RecyclerView.ViewHolder{
         @Bind(R.id.recipeNameTextView)
@@ -61,6 +59,8 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         @Bind(R.id.ratingTextView) TextView mRatingTextView;
         @Bind(R.id.recipeImageView)
         ImageView mRecipeImageView;
+        @Bind(R.id.prepTimeTextView) TextView mPrepTimeTextView;
+       // @Bind(R.id.ingredientsTextView) TextView mIngredientsTextView;
 
         private Context mContext;
 
@@ -73,6 +73,8 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         public void bindRecipe(Recipe recipe){
         mNameTextView.setText(recipe.getRecipeName());
         mRatingTextView.setText("Rating:"+ recipe.getRating() +"/5");
+        //mPrepTimeTextView.setText(recipe.getPrepTime());
+
         }
     }
 

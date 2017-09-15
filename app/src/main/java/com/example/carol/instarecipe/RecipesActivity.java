@@ -3,11 +3,13 @@ package com.example.carol.instarecipe;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.widget.ArrayAdapter;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.carol.instarecipe.adapters.RecipeListAdapter;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,12 +29,13 @@ public class RecipesActivity extends AppCompatActivity {
     //private ListView mListView;
 
     //use butterknife to bind the views
-
+    @Bind(R.id.recyclerView)
+    RecyclerView mRecyclerView;
     @Bind(R.id.listView)ListView mListView;
     @Bind(R.id.recipeTextView) TextView mRecipeTextView;
     //declare array to display the categories of recipes available*Commented out because we no longer need a hardcoded arraylist*
    // private String[] recipeOptions = new String[]{"Protein Slow-Cooker Meals", "Pastries and Deserts", "Juices and Smoothies", "Slow Cooker Beef"};
-
+    private RecipeListAdapter mAdapter;
 
 
     public ArrayList<Recipe> mRecipes = new ArrayList<>();
@@ -49,7 +52,7 @@ public class RecipesActivity extends AppCompatActivity {
 
         Intent enterRecipe = getIntent();
         String recipes = enterRecipe.getStringExtra("recipes");
-        mRecipeTextView.setText("Hello " + recipes + ".We invite you to savour our delicious recipes!");
+        mRecipeTextView.setText("Find all the dishes related to your search:" + recipes +" !");
 
 //implementing array adapters to allow display of the list items on the layout*Commented out: previously used on the hard coded array*
 //        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, recipeOptions);
@@ -84,19 +87,26 @@ public class RecipesActivity extends AppCompatActivity {
                 RecipesActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        //create a list of names to allow user to view several options when enter a recipe name
-                        String[] recipeNames = new String[mRecipes.size()];
-                        for (int i = 0; i < recipeNames.length; i++) {
-                            recipeNames[i] = mRecipes.get(i).getRecipeName();
-                        }
-                        //create an array adapter to pass data into the view
-                        ArrayAdapter adapter = new ArrayAdapter(RecipesActivity.this,
-                                android.R.layout.simple_list_item_1, recipeNames);
-                        mListView.setAdapter(adapter);
-                        for(Recipe recipe: mRecipes){
-                            Log.d(TAG, "recipeName:" + recipe.getRecipeName());
-                            Log.d(TAG, "Ingredients:" + recipe.getIngredients().toString());
-                        }
+
+                        mAdapter=new RecipeListAdapter(getApplicationContext(),mRecipes);
+                        mRecyclerView.setAdapter(mAdapter);
+                        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(RecipesActivity.this);
+                        mRecyclerView.setLayoutManager(layoutManager);
+                        mRecyclerView.setHasFixedSize(true);
+
+//                        //create a list of names to allow user to view several options when enter a recipe name
+//                        String[] recipeNames = new String[mRecipes.size()];
+//                        for (int i = 0; i < recipeNames.length; i++) {
+//                            recipeNames[i] = mRecipes.get(i).getRecipeName();
+//                        }
+//                        //create an array adapter to pass data into the view
+//                        ArrayAdapter adapter = new ArrayAdapter(RecipesActivity.this,
+//                                android.R.layout.simple_list_item_1, recipeNames);
+//                        mListView.setAdapter(adapter);
+//                        for(Recipe recipe: mRecipes){
+//                            Log.d(TAG, "recipeName:" + recipe.getRecipeName());
+//                            Log.d(TAG, "Ingredients:" + recipe.getIngredients().toString());
+//                        }
                     }
 
 //

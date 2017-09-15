@@ -59,12 +59,11 @@ public ArrayList<Recipe> processResults(Response response){
             String recipeName=recipeJSON.getString("recipeName");
             String imageUrl=recipeJSON.getString("smallImageUrls");
             double rating=recipeJSON.getDouble("rating");
-                double prepTime=recipeJSON.getDouble("totalTimeInSeconds");
+            int prepTime=recipeJSON.getInt("totalTimeInSeconds");
             ArrayList<String> ingredients=new ArrayList<>();
             JSONArray ingredientsJSON=recipeJSON.getJSONArray("ingredients");
                 for (int j = 0; j < ingredientsJSON.length(); j++) {
                     ingredients.add(ingredientsJSON.get(j).toString());
-
                 }
 
             Recipe recipe=new Recipe(recipeName,ingredients,rating,imageUrl,prepTime);
