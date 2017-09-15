@@ -40,6 +40,6 @@ public class Recipe {
         return mRating;
     }
     public int getPrepTime(){
-        return mPrepTime;
+        return mPrepTime/60;
     }
 }

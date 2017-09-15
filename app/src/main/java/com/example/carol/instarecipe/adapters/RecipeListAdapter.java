@@ -73,7 +73,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         public void bindRecipe(Recipe recipe){
         mNameTextView.setText(recipe.getRecipeName());
         mRatingTextView.setText("Rating:"+ recipe.getRating() +"/5");
-        //mPrepTimeTextView.setText(recipe.getPrepTime());
+        mPrepTimeTextView.setText(recipe.getPrepTime() + "Mins");
 
         }
     }
