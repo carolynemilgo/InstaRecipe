@@ -11,7 +11,7 @@
     android:paddingTop="16dp"
     android:orientation="vertical"
     tools:context="com.example.carol.instarecipe.RecipesActivity">
-//added the recycler view widget to the activirty restaurants layout file
+<!--added the recycler view widget to the activirty restaurants layout file-->
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
