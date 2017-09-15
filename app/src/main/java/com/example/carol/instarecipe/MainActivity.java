@@ -60,10 +60,10 @@ public class MainActivity extends AppCompatActivity {
            public void onClick(View v){
                //declare intent of type Intent which will allow user to enter their name
                //which is displayed in the next activity-RecipesActivity
-               String guestName=mEditTextView.getText().toString();
-               Intent findRecipes=new Intent(MainActivity.this, RecipesActivity.class);
-               findRecipes.putExtra("guestName",guestName);
-               startActivity(findRecipes);
+               String recipes=mEditTextView.getText().toString();
+               Intent enterRecipe=new Intent(MainActivity.this, RecipesActivity.class);
+               enterRecipe.putExtra("recipes",recipes);
+               startActivity(enterRecipe);
            }
 
       });

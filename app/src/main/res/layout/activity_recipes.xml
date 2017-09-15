@@ -11,6 +11,12 @@
     android:paddingTop="16dp"
     android:orientation="vertical"
     tools:context="com.example.carol.instarecipe.RecipesActivity">
+//added the recycler view widget to the activirty restaurants layout file
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recyclerView"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,10 +34,10 @@
     android:paddingTop="8dp"
 
     />
-<Button
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="Submit a Recipe"
-    android:id="@+id/submitRecipe"
-    android:paddingTop="15dp"/>
+<!--<Button-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Submit a Recipe"-->
+    <!--android:id="@+id/submitRecipe"-->
+    <!--android:paddingTop="15dp"/>-->
 </LinearLayout>
