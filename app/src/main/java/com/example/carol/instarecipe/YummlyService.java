@@ -57,7 +57,9 @@ public ArrayList<Recipe> processResults(Response response){
 
             //target the matches array that contains information that the recipe constructor requires
             String recipeName=recipeJSON.getString("recipeName");
-            String imageUrl=recipeJSON.getString("smallImageUrls");
+           String imageUrl=recipeJSON.getJSONObject("imageUrlsBySize").getString("90");
+            //String webUrl=recipeJSON.getString("url");
+           // double calories=recipeJSON.getJSONObject("nutritionEstimates").getDouble("value");
             double rating=recipeJSON.getDouble("rating");
             int prepTime=recipeJSON.getInt("totalTimeInSeconds");
             ArrayList<String> ingredients=new ArrayList<>();

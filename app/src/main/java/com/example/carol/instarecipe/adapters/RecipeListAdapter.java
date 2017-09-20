@@ -1,6 +1,7 @@
 package com.example.carol.instarecipe.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +11,10 @@ import android.widget.TextView;
 
 import com.example.carol.instarecipe.R;
 import com.example.carol.instarecipe.Recipe;
+import com.example.carol.instarecipe.RecipeDetailActivity;
 import com.squareup.picasso.Picasso;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
@@ -54,7 +58,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         return mRecipes.size();
     }
     //create a nested class which is our view holder
-    public class RecipeViewHolder extends RecyclerView.ViewHolder{
+    public class RecipeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         @Bind(R.id.recipeNameTextView)
         TextView mNameTextView;
         @Bind(R.id.ratingTextView) TextView mRatingTextView;
@@ -66,9 +70,21 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
         private Context mContext;
 
         public RecipeViewHolder(View itemView){
+
+
             super(itemView);
             ButterKnife.bind(this, itemView);
             mContext=itemView.getContext();
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int itemPosition = getLayoutPosition();
+            Intent intent = new Intent(mContext, RecipeDetailActivity.class);
+            intent.putExtra("position", itemPosition);
+            intent.putExtra("recipes", Parcels.wrap(mRecipes));
+            mContext.startActivity(intent);
         }
 
         public void bindRecipe(Recipe recipe){
@@ -78,7 +94,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
 
         mNameTextView.setText(recipe.getRecipeName());
         mRatingTextView.setText("Rating:"+ recipe.getRating() +"/5");
-        mPrepTimeTextView.setText(recipe.getPrepTime() + "Mins");
+        mPrepTimeTextView.setText("Prep Time:"+recipe.getPrepTime() + "Mins");
 
         }
     }

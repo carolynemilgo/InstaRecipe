@@ -2,6 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    
+
     tools:context="com.example.carol.instarecipe.RecipeDetailFragment">
 
 
@@ -9,7 +11,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary">
+        >
 
         <ImageView
             android:layout_width="match_parent"
@@ -52,7 +54,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Preparation Time"
                 android:id="@+id/prepTimeTextView"
                 android:layout_below="@+id/recipeNameTextView"
                 android:layout_alignParentLeft="true"
@@ -69,26 +70,45 @@
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_above="@+id/recipeImageView"
                 android:paddingLeft="30dp"
                 android:paddingTop="20dp"
-                android:paddingRight="30dp">
-
+                android:paddingRight="30dp"
+                android:background="@color/colorWhite"
+                >
+                <!--android:layout_below="@+id/prepTimeTextView"-->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="View on Yummly"
                     android:id="@+id/websiteTextView"
-                                        android:drawablePadding="4dp"
+                    android:drawablePadding="4dp"
                     android:textColor="@color/colorAccent"
                     android:textSize="15sp"
                     android:textStyle="bold"
                     android:layout_marginBottom="10dp"
                     android:gravity="center" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ingredients"
+                    android:textStyle="bold"
+                    android:drawablePadding="4dp"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ingredientsTextView"
+                    android:drawablePadding="4dp"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    />
 
             </LinearLayout>
 

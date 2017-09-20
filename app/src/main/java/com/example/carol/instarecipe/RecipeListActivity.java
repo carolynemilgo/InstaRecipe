@@ -50,6 +50,8 @@ public class RecipeListActivity extends AppCompatActivity {
         //mSubmitRecipeButton = (Button) findViewById(R.id.submitRecipe);
         ButterKnife.bind(this);
 
+
+
         Intent enterRecipe = getIntent();
         String recipes = enterRecipe.getStringExtra("recipes");
         mRecipeTextView.setText("Find all the dishes related to your search:" + recipes +" !");

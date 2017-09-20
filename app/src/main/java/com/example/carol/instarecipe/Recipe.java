@@ -15,6 +15,8 @@ public class Recipe {
     private double mRating;
     private String mImageUrl;
     private int mPrepTime;
+    //private double mCalories;
+    private String mWebUrl;
 
 
     public Recipe() {}
@@ -25,6 +27,8 @@ public class Recipe {
         this.mRating = rating;
         this.mIngredients = ingredients;
         this.mPrepTime=prepTime;
+        //this.mCalories=calories;
+       //this.mWebUrl=webUrl;
     }
 
     //getter methods
@@ -46,4 +50,11 @@ public class Recipe {
     public int getPrepTime(){
         return mPrepTime/60;
     }
+//    public double getCalories(){
+//        return mCalories;
+//    }
+
+//    public String getUrl(){
+//        return mWebUrl;
+//    }
 }

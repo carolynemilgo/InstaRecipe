@@ -36,9 +36,16 @@ public class MainActivity extends AppCompatActivity {
         //mIntroMessage=(TextView) findViewById(R.id.introMessage);
 
         //define the font as type Typeface
+
         Typeface ralewayFont=Typeface.createFromAsset(getAssets(),"fonts/Raleway-ExtraLight.ttf");
         mIntroMessage.setTypeface(ralewayFont);
-        //mFindRecipesButton.setTypeface(ralewayFont);
+
+//
+//        TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "fonts/Raleway-ExtraLight.ttf"); // font from assets: "assets/fonts/Roboto-Regular.ttf
+
+
+
+         mFindRecipesButton.setTypeface(ralewayFont);
 
         //adding a toast to the main image on the home page using click listeners
         //mWelcomePage=(ImageView) findViewById(R.id.welcomePage);

@@ -28,7 +28,8 @@ public class RecipeDetailFragment extends Fragment {
     TextView mRecipeNameLabel;
     @Bind(R.id.ratingTextView) TextView mRatingLabel;
     @Bind(R.id.prepTimeTextView) TextView mPrepTimeLabel;
-   // @Bind(R.id.websiteTextView) TextView mWebsiteLabel;
+    @Bind(R.id.ingredientsTextView) TextView mIngredientsTextView;
+   @Bind(R.id.websiteTextView) TextView mWebsiteLabel;
 
 
     private  Recipe mRecipe;
@@ -56,11 +57,12 @@ public class RecipeDetailFragment extends Fragment {
                 ButterKnife.bind(this, view);
                 Picasso.with(view.getContext()).load(mRecipe.getImageUrl()).into(mImageLabel);
 
-//                mImageLabel.setText(mRecipe.getImageUrl());
-                mPrepTimeLabel.setText(mRecipe.getPrepTime());
+              // mImageLabel.setText(mRecipe.getImageUrl());
+                mPrepTimeLabel.setText(String.valueOf(mRecipe.getPrepTime())+ " Minutes");
                 mRatingLabel.setText(Double.toString(mRecipe.getRating()) + "/5");
-                //mWebsiteLabel.setText(mRecipe.getWebAddress());
+                //mWebsiteLabel.setText(mRecipe.getUrl());
                 mRecipeNameLabel.setText(mRecipe.getRecipeName());
+                mIngredientsTextView.setText(android.text.TextUtils.join("\n",mRecipe.getIngredients()));
 
 
         return view;
