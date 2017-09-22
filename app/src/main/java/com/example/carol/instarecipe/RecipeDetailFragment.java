@@ -64,7 +64,8 @@ public class RecipeDetailFragment extends Fragment {
                 mRecipeNameLabel.setText(mRecipe.getRecipeName());
                 mIngredientsTextView.setText(android.text.TextUtils.join("\n",mRecipe.getIngredients()));
 
-
+                //Typeface ralewayFont=Typeface.createFromAsset(getAssets(),"fonts/Raleway-ExtraLight.ttf");
+               // mIngredientsTextView.getAsssetTypeface(ralewayFont);
         return view;
     }
 
