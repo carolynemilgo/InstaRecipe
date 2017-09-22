@@ -4,12 +4,19 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -21,6 +28,12 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.editTextView) EditText mEditTextView;
     @Bind(R.id.welcomePage) ImageView mWelcomePage;
     @Bind(R.id.introMessage)TextView mIntroMessage;
+
+    private DatabaseReference mSearchedRecipeReference;
+
+    private ValueEventListener mSearchedRecipeReferenceListener;//
+    //private DatabaseReference FirebaseDatabase;
+
     //private TextView mIntroMessage;
     //private Button mFindRecipesButton;
     //private ImageView mWelcomePage;
@@ -29,6 +42,33 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mSearchedRecipeReference= FirebaseDatabase
+                .getInstance()
+                .getReference()
+                .child(Constants.FIREBASE_CHILD_SEARCHED_RECIPE);
+
+
+
+//attaching a listener
+        mSearchedRecipeReferenceListener= mSearchedRecipeReference.addValueEventListener(new ValueEventListener() { //attach listener
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) { //something changed!
+                for (DataSnapshot recipeSnapshot : dataSnapshot.getChildren()) {
+                    String recipes = recipeSnapshot.getValue().toString();
+                    Log.d("Recipes updated", "recipes: " + recipes); //log
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) { //update UI here if error occurred.
+
+            }
+        });
+
+
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
@@ -68,6 +108,9 @@ public class MainActivity extends AppCompatActivity {
                //declare intent of type Intent which will allow user to enter their name
                //which is displayed in the next activity-RecipeListActivity
                String recipes=mEditTextView.getText().toString();
+
+               saveLocationToFirebase(recipes);
+
                Intent enterRecipe=new Intent(MainActivity.this, RecipeListActivity.class);
                enterRecipe.putExtra("recipes",recipes);
                startActivity(enterRecipe);
@@ -75,4 +118,20 @@ public class MainActivity extends AppCompatActivity {
 
       });
     }
+//method that runs when activity is halted
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mSearchedRecipeReference.removeEventListener(mSearchedRecipeReferenceListener);
+    }
+
+    public void saveLocationToFirebase(String recipes) {
+        mSearchedRecipeReference.setValue(recipes);
+    }
+
+
+
+
+
+
 }
