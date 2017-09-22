@@ -3,52 +3,53 @@ package com.example.carol.instarecipe;
 import org.parceler.Parcel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by carol on 9/14/17.
  */
 @Parcel
 public class Recipe {
-    private String mRecipeName;
+    String recipeName;
     //private String  mId;
-    private ArrayList<String> mIngredients = new ArrayList<>();
-    private double mRating;
-    private String mImageUrl;
-    private int mPrepTime;
+   List <String> ingredients = new ArrayList<>();
+    double rating;
+    String imageUrl;
+    int prepTime;
     //private double mCalories;
-    private String mWebUrl;
+    String webUrl;
 
 
     public Recipe() {}
 
     public Recipe(String recipeName, ArrayList<String> ingredients, double rating, String imageUrl, int prepTime) {
-        this.mRecipeName = recipeName;
-        this.mImageUrl = imageUrl;
-        this.mRating = rating;
-        this.mIngredients = ingredients;
-        this.mPrepTime=prepTime;
+        this.recipeName = recipeName;
+        this.imageUrl = imageUrl;
+        this.rating = rating;
+        this.ingredients = ingredients;
+        this.prepTime=prepTime;
         //this.mCalories=calories;
        //this.mWebUrl=webUrl;
     }
 
     //getter methods
     public String getRecipeName() {
-        return mRecipeName;
+        return recipeName;
     }
 
     public String getImageUrl() {
-        return mImageUrl;
+        return imageUrl;
     }
 
-    public ArrayList<String> getIngredients() {
-        return mIngredients;
+    public List<String> getIngredients() {
+        return ingredients;
     }
 
     public double getRating() {
-        return mRating;
+        return rating;
     }
     public int getPrepTime(){
-        return mPrepTime/60;
+        return prepTime/60;
     }
 //    public double getCalories(){
 //        return mCalories;

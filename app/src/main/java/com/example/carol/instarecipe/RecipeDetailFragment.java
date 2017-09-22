@@ -6,9 +6,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
@@ -20,7 +24,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RecipeDetailFragment extends Fragment {
+public class RecipeDetailFragment extends Fragment implements View.OnClickListener{
 
     @Bind(R.id.recipeImageView)
     ImageView mImageLabel;
@@ -30,7 +34,8 @@ public class RecipeDetailFragment extends Fragment {
     @Bind(R.id.prepTimeTextView) TextView mPrepTimeLabel;
     @Bind(R.id.ingredientsTextView) TextView mIngredientsTextView;
    @Bind(R.id.websiteTextView) TextView mWebsiteLabel;
-
+    @Bind(R.id.saveRecipeButton)
+    Button mSaveRecipeButton;
 
     private  Recipe mRecipe;
 
@@ -66,7 +71,26 @@ public class RecipeDetailFragment extends Fragment {
 
                 //Typeface ralewayFont=Typeface.createFromAsset(getAssets(),"fonts/Raleway-ExtraLight.ttf");
                // mIngredientsTextView.getAsssetTypeface(ralewayFont);
+                mRecipeNameLabel.setOnClickListener(this);
+                mSaveRecipeButton.setOnClickListener(this);
+
+
         return view;
     }
+    @Override
+    public void onClick(View v){
+//        if(v == mRecipeNameLabel(){
+//            Intent webIntent = new Intent(Intent.ACTION_VIEW,
+//                    Uri.parse(mRecipe.getRecipeName()));
+//            startActivity(webIntent);
+//        }
 
+        if (v == mSaveRecipeButton) {
+            DatabaseReference restaurantRef = FirebaseDatabase
+                    .getInstance()
+                    .getReference(Constants.FIREBASE_CHILD_RECIPES);
+            restaurantRef.push().setValue(mRecipe);
+            Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
+        }
+    }
 }
