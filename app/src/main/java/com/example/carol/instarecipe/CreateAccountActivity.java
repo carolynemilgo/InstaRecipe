@@ -67,25 +67,33 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
 
     }
 
-
-    private void createNewUser() {
+//logic for creation of new users
+    public void createNewUser() {
         final String name = mNameEditText.getText().toString().trim();
         final String email = mEmailEditText.getText().toString().trim();
         String password = mPasswordEditText.getText().toString().trim();
         String confirmPassword = mConfirmPasswordEditText.getText().toString().trim();
 
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Log.d(TAG, "Authentication successful");
-                        } else {
-                            Toast.makeText(CreateAccountActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+        boolean validEmail = isValidEmail(email);
+        boolean validName = isValidName(name);
+        boolean validPassword = isValidPassword(password, confirmPassword);
+        if (!validEmail || !validName || !validPassword) return;
+
+        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                if (task.isSuccessful()) {
+                    Log.d(TAG, "Authentication successful");
+                } else {
+                    Toast.makeText(CreateAccountActivity.this, "Authentication failed.",
+                            Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+        });
     }
 //Listen to changes in current authstate and in the event of a change, trigger the onAuthStateChanged method which
     //delivers the FirebaseAuth data
