@@ -16,12 +16,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
-
-import static com.example.carol.instarecipe.R.id.prepTimeTextView;
 
 /**
  * Created by carol on 9/22/17.
@@ -48,9 +47,11 @@ public class FirebaseRecipeViewHolder extends RecyclerView.ViewHolder implements
     public void bindRecipe(Recipe recipe){
         ImageView recipeImageView = (ImageView) mView.findViewById(R.id.recipeImageView);
         TextView nameTextView = (TextView) mView.findViewById(R.id.recipeNameTextView);
-        TextView prepTextView = (TextView) mView.findViewById(prepTimeTextView);
+        TextView prepTextView = (TextView) mView.findViewById(R.id.prepTimeTextView);
         TextView ratingTextView = (TextView) mView.findViewById(R.id.ratingTextView);
 
+
+        Picasso.with(mContext).load(recipe.getImageUrl()).resize(MAX_WIDTH,MAX_HEIGHT).centerCrop().into(recipeImageView);
 
         nameTextView.setText(recipe.getRecipeName());
         prepTextView.setText(recipe.getPrepTime());

@@ -7,4 +7,7 @@
     <color name="colorOrange">#FFA500</color>
     <color name="colorGold">#FFD700</color>
     <color name="black">#000000</color>
+    <color name="colorDivider">#B6B6B6</color>
+    <color name="colorTextIcons">#ffffff</color>
+    <color name="colorPrimaryLight">#ffccbc</color>
 </resources>
