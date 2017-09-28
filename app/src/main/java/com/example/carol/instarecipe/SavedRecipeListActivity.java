@@ -42,10 +42,11 @@ public class SavedRecipeListActivity extends AppCompatActivity {
             @Override
             protected void populateViewHolder(FirebaseRecipeViewHolder viewHolder,
                                               Recipe model, int position) {
+
                 viewHolder.bindRecipe(model);
             }
         };
-        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setHasFixedSize(false);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mFirebaseAdapter);
     }

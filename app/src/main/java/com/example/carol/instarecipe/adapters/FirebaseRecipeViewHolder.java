@@ -54,7 +54,7 @@ public class FirebaseRecipeViewHolder extends RecyclerView.ViewHolder implements
         Picasso.with(mContext).load(recipe.getImageUrl()).resize(MAX_WIDTH,MAX_HEIGHT).centerCrop().into(recipeImageView);
 
         nameTextView.setText(recipe.getRecipeName());
-        prepTextView.setText(recipe.getPrepTime());
+        prepTextView.setText(String.valueOf(recipe.getPrepTime()));
         ratingTextView.setText("Rating: " + recipe.getRating() + "/5");
     }
 
