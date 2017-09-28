@@ -105,6 +105,20 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
 
         };
     }
+    //called each time the activity is visible (whether being created for the first time or being restarted)
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+//called when activity is no longer visible
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
 
 }
 
