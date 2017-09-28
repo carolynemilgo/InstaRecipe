@@ -34,12 +34,10 @@
         android:textSize="15sp"
         android:hint="Enter name of recipe"
         android:textColor="@color/colorWhite"
-        android:layout_alignTop="@+id/welcomePage"
+        android:layout_marginTop="30dp"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="18dp"
-        android:layout_marginStart="18dp"
-        />
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="match_parent"

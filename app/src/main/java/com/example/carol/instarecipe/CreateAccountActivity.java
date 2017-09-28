@@ -1,5 +1,6 @@
 package com.example.carol.instarecipe;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,6 +17,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -26,6 +28,8 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
 //to respond to users change in authentication state
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAuth mAuth;
+    private ProgressDialog mAuthProgressDialog;
+    private String mName;
 
     @Bind(R.id.createUserButton)
     Button mCreateUserButton;
@@ -45,7 +49,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         ButterKnife.bind(this);
         mAuth = FirebaseAuth.getInstance();
         createAuthStateListener();
-
+        createAuthProgressDialog();
 
 
         mLoginTextView.setOnClickListener(this);
@@ -53,6 +57,14 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
 
 
     }
+
+    private void createAuthProgressDialog() {
+        mAuthProgressDialog = new ProgressDialog(this);
+        mAuthProgressDialog.setTitle("Loading...");
+        mAuthProgressDialog.setMessage("Authenticating with Firebase...");
+        mAuthProgressDialog.setCancelable(false);
+    }
+
     @Override
     public void onClick (View view){
 
@@ -71,21 +83,26 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
 
 //logic for creation of new users
     public void createNewUser() {
+        mName = mNameEditText.getText().toString().trim();
         final String name = mNameEditText.getText().toString().trim();
         final String email = mEmailEditText.getText().toString().trim();
         String password = mPasswordEditText.getText().toString().trim();
         String confirmPassword = mConfirmPasswordEditText.getText().toString().trim();
 
         boolean validEmail = isValidEmail(email);
-        boolean validName = isValidName(name);
+        boolean validName = isValidName(mName);
         boolean validPassword = isValidPassword(password, confirmPassword);
         if (!validEmail || !validName || !validPassword) return;
+
+        mAuthProgressDialog.show();
 
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
 
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 
+
+                mAuthProgressDialog.dismiss();
                 if (task.isSuccessful()) {
                     Log.d(TAG, "Authentication successful");
                 } else {
@@ -115,6 +132,27 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
 
         };
     }
+    //method to set the users name
+    private void createFirebaseUserProfile(final FirebaseUser user) {
+
+        UserProfileChangeRequest addProfileName = new UserProfileChangeRequest.Builder()
+                .setDisplayName(mName)
+                .build();
+
+        user.updateProfile(addProfileName)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, user.getDisplayName());
+                        }
+                    }
+
+                });
+    }
+
+
     //called each time the activity is visible (whether being created for the first time or being restarted)
     @Override
     public void onStart() {
