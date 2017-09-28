@@ -3,6 +3,7 @@ package com.example.carol.instarecipe;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -13,9 +14,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,15 +26,24 @@ import com.google.firebase.database.ValueEventListener;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-//declare member variables(for the views-textview,editview and button) and define it at runtime in the onCreate method
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    //declare member variables(for the views-textview,editview and button) and define it at runtime in the onCreate method
     //use butterknife to bind them
-    @Bind(R.id.findRecipesButton) Button mFindRecipesButton;
-    @Bind(R.id.editTextView) EditText mEditTextView;
-    @Bind(R.id.welcomePage) ImageView mWelcomePage;
-    @Bind(R.id.introMessage)TextView mIntroMessage;
+    @Bind(R.id.findRecipesButton)
+    Button mFindRecipesButton;
+    @Bind(R.id.editTextView)
+    EditText mEditTextView;
+    @Bind(R.id.welcomePage)
+    ImageView mWelcomePage;
+    @Bind(R.id.introMessage)
+    TextView mIntroMessage;
 
-    @Bind(R.id.savedRecipesButton) Button mSavedRecipesButton;
+    @Bind(R.id.savedRecipesButton)
+    Button mSavedRecipesButton;
+
+
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
 
     private DatabaseReference mSearchedRecipeReference;
 
@@ -48,15 +58,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        mSearchedRecipeReference= FirebaseDatabase
+        mSearchedRecipeReference = FirebaseDatabase
                 .getInstance()
                 .getReference()
                 .child(Constants.FIREBASE_CHILD_SEARCHED_RECIPE);
 
 
-
 //attaching a listener
-        mSearchedRecipeReferenceListener= mSearchedRecipeReference.addValueEventListener(new ValueEventListener() { //attach listener
+        mSearchedRecipeReferenceListener = mSearchedRecipeReference.addValueEventListener(new ValueEventListener() { //attach listener
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) { //something changed!
@@ -73,8 +82,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
 
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
@@ -83,28 +90,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //define the font as type Typeface
 
-        Typeface ralewayFont=Typeface.createFromAsset(getAssets(),"fonts/Raleway-ExtraLight.ttf");
+        Typeface ralewayFont = Typeface.createFromAsset(getAssets(), "fonts/Raleway-ExtraLight.ttf");
         mIntroMessage.setTypeface(ralewayFont);
 
 //
 //        TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "fonts/Raleway-ExtraLight.ttf"); // font from assets: "assets/fonts/Roboto-Regular.ttf
 
 
-
-         mFindRecipesButton.setTypeface(ralewayFont);
+        mFindRecipesButton.setTypeface(ralewayFont);
 
         //adding a toast to the main image on the home page using click listeners
         //mWelcomePage=(ImageView) findViewById(R.id.welcomePage);
-        mWelcomePage.setOnClickListener(new View.OnClickListener() {
+
+
+        mAuth = FirebaseAuth.getInstance();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
-            public void onClick(View imageView) {
-                Toast.makeText(MainActivity.this, "Explore our world of recipes", Toast.LENGTH_SHORT).show();
-            }
-        })  ;
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                //display welcome message
+               // mWelcomePage.setOnClickListener(new View.OnClickListener() {
+                    FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                        getSupportActionBar().setTitle("Welcome, " + user.getDisplayName() + "!");
+                    } else {
+
+                    }
+            };
+        };
 
 
         //mFindRecipesButton=(Button) findViewById(R.id.findRecipesButton);
-       // mFindRecipesButton.setOnClickListener(new View.OnClickListener(){
+        // mFindRecipesButton.setOnClickListener(new View.OnClickListener(){
         //mEditTextView=(EditText) findViewById(R.id.editTextView);
         //mFindRecipesButton=(Button) findViewById(R.id.findRecipesButton);
         //adding a click listener to the button
@@ -112,6 +128,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mSavedRecipesButton.setOnClickListener(this);
 
     }
+
     @Override
     public void onClick(View v) {
         //declare intent of type Intent which will allow user to enter their name
@@ -119,16 +136,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String recipes = mEditTextView.getText().toString();
 
         saveLocationToFirebase(recipes);
-        if(v==mFindRecipesButton){
-        Intent enterRecipe = new Intent(MainActivity.this, RecipeListActivity.class);
-        enterRecipe.putExtra("recipes", recipes);
-        startActivity(enterRecipe);
-    }
+        if (v == mFindRecipesButton) {
+            Intent enterRecipe = new Intent(MainActivity.this, RecipeListActivity.class);
+            enterRecipe.putExtra("recipes", recipes);
+            startActivity(enterRecipe);
+        }
 
-        if(v == mSavedRecipesButton) {
+        if (v == mSavedRecipesButton) {
             Intent intent = new Intent(MainActivity.this, SavedRecipeListActivity.class);
             startActivity(intent);
-    }
+        }
 
     }
 
@@ -152,7 +169,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return super.onCreateOptionsMenu(menu);
     }
 
-//instruct app to performa a specific action when logout option is selected
+    //instruct app to performa a specific action when logout option is selected
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -162,6 +179,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         return super.onOptionsItemSelected(item);
     }
+
     private void logout() {
         FirebaseAuth.getInstance().signOut();//firebase inbuilts signout method for logging out users
 
@@ -172,5 +190,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         finish();
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
 }

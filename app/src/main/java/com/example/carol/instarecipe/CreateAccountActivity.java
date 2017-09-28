@@ -63,6 +63,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     getSupportActionBar().setTitle("Welcome, " + user.getDisplayName() + "!");
+
                 } else {
 
                 }
