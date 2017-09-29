@@ -36,7 +36,7 @@ public class SavedRecipeListActivity extends AppCompatActivity {
     }
     private void setUpFirebaseAdapter() {
         mFirebaseAdapter = new FirebaseRecyclerAdapter<Recipe, FirebaseRecipeViewHolder>
-                (Recipe.class, R.layout.recipe_list_item, FirebaseRecipeViewHolder.class,
+                (Recipe.class, R.layout.recipe_list_item_drag, FirebaseRecipeViewHolder.class,
                         mRecipeReference) {
 
             @Override
