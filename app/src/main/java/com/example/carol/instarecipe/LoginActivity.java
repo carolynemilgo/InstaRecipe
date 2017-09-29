@@ -1,5 +1,6 @@
 package com.example.carol.instarecipe;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -23,6 +24,7 @@ import butterknife.ButterKnife;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String TAG = LoginActivity.class.getSimpleName();
+    private ProgressDialog mAuthProgressDialog;//for the progress dialog boxes
 
     @Bind(R.id.registerTextView)
     TextView mRegisterTextView;
@@ -63,7 +65,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         };
 
-
+        createAuthProgressDialog();//implementing the progress dialog function
     }
 
 
@@ -102,12 +104,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             mPasswordEditText.setError("Password cannot be blank");
             return;
         }
+
+        mAuthProgressDialog.show();
 // calling the built-in Firebase method called signInWithEmailAndPassword() within our loginWithPassword()
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
 
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        mAuthProgressDialog.dismiss();
                         Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
                         if (!task.isSuccessful()) {
                             Log.w(TAG, "signInWithEmail", task.getException());
@@ -117,5 +122,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     }
                 });
 
+    }
+    //progress dialogs
+    private void createAuthProgressDialog() {
+        mAuthProgressDialog = new ProgressDialog(this);
+        mAuthProgressDialog.setTitle("Loading...");
+        mAuthProgressDialog.setMessage("Authenticating with Firebase...");
+        mAuthProgressDialog.setCancelable(false);
     }
 }
