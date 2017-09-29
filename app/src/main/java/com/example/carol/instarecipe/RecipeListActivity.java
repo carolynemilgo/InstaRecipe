@@ -1,6 +1,7 @@
 package com.example.carol.instarecipe;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,6 +24,10 @@ import okhttp3.Response;
 public class RecipeListActivity extends AppCompatActivity {
     public static final String TAG = RecipeListActivity.class.getSimpleName();
 
+    //add shared preferences to allow users search recipes with the search widget and the editor
+    private SharedPreferences mSharedPreferences;
+    private SharedPreferences.Editor mEditor;
+    private String mRecentRecipe;
 
     private Button mSubmitRecipeButton;
     //  private TextView mRecipeTextView;
@@ -67,6 +72,12 @@ public class RecipeListActivity extends AppCompatActivity {
 //            }
 //        });
         getRecipes(recipes);
+    }
+
+
+    //method to write data to shared preferences
+    private void addToSharedPreferences(String recipe) {
+        mEditor.putString(Constants.PREFERENCES_RECIPE_KEY, recipe).apply();
     }
 
     //receiving a response
