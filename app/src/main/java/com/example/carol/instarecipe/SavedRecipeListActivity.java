@@ -10,8 +10,6 @@ import com.example.carol.instarecipe.adapters.FirebaseRecipeListAdapter;
 import com.example.carol.instarecipe.adapters.FirebaseRecipeViewHolder;
 import com.example.carol.instarecipe.util.OnStartDragListener;
 import com.example.carol.instarecipe.util.SimpleItemTouchHelperCallback;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -42,24 +40,19 @@ public class SavedRecipeListActivity extends AppCompatActivity implements OnStar
     }
     private void setUpFirebaseAdapter() {
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String uid = user.getUid();
+//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//        String uid = user.getUid();
 
         mRecipeReference = FirebaseDatabase
                 .getInstance()
-                .getReference(Constants.FIREBASE_CHILD_RECIPES)
-                .child(uid);
+                .getReference(Constants.FIREBASE_CHILD_RECIPES);
+              //  .child(uid);
 
         mFirebaseAdapter = new FirebaseRecipeListAdapter(Recipe.class,
                 R.layout.recipe_list_item_drag, FirebaseRecipeViewHolder.class,
                 mRecipeReference, this, this);
-//            @Override
-//            protected void populateViewHolder(FirebaseRecipeViewHolder viewHolder,
-//                                              Recipe model, int position) {
-//
-//                viewHolder.bindRecipe(model);
-//            }
-//        };
+
+
         mRecyclerView.setHasFixedSize(false);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mFirebaseAdapter);

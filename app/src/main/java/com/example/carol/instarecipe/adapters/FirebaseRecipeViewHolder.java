@@ -11,6 +11,7 @@ import com.example.carol.instarecipe.Constants;
 import com.example.carol.instarecipe.R;
 import com.example.carol.instarecipe.Recipe;
 import com.example.carol.instarecipe.RecipeDetailActivity;
+import com.example.carol.instarecipe.util.OnStartDragListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,7 +30,8 @@ import java.util.ArrayList;
 
 public class FirebaseRecipeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    public ImageView mRecipeImageView;//varibale to hold the value for making the image view public
+public ImageView mRecipeImageView;
+    private OnStartDragListener mOnStartDragListener;
 
         private static final int MAX_WIDTH = 200;
         private static final int MAX_HEIGHT = 200;
@@ -73,7 +75,8 @@ public class FirebaseRecipeViewHolder extends RecyclerView.ViewHolder implements
 
                 int itemPosition = getLayoutPosition();
 
-                Intent intent = new Intent(mContext, RecipeDetailActivity.class);intent.putExtra("position", itemPosition + "");
+                Intent intent = new Intent(mContext, RecipeDetailActivity.class);
+                intent.putExtra("position", itemPosition + "");
                 intent.putExtra("recipes", Parcels.wrap(recipes));
 
                 mContext.startActivity(intent);
@@ -82,6 +85,11 @@ public class FirebaseRecipeViewHolder extends RecyclerView.ViewHolder implements
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
+
+
         });
     }
 }
+
+
+
