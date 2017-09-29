@@ -40,15 +40,15 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
     @Bind(R.id.loginTextView) TextView mLoginTextView;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
         ButterKnife.bind(this);
+
+
         mAuth = FirebaseAuth.getInstance();
-        createAuthStateListener();
+      //  createAuthStateListener();
         createAuthProgressDialog();
 
 
@@ -69,6 +69,20 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
                 }
 
             }
+        };
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                final FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    Intent intent = new Intent(CreateAccountActivity.this, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+
         };
     }
 
@@ -131,22 +145,9 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
     }
 //Listen to changes in current authstate and in the event of a change, trigger the onAuthStateChanged method which
     //delivers the FirebaseAuth data
-    private void createAuthStateListener() {
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                final FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    Intent intent = new Intent(CreateAccountActivity.this, MainActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                    finish();
-                }
-            }
-
-        };
-    }
+//    private void createAuthStateListener() {
+//
+//    }
     //method to set the users name
     private void createFirebaseUserProfile(final FirebaseUser user) {
 
