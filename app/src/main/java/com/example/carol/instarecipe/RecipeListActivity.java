@@ -68,6 +68,14 @@ public class RecipeListActivity extends AppCompatActivity {
         mRecipeTextView.setText("Find all the dishes related to your search:" + recipes +" !");
 
         getRecipes(recipes);
+
+
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mRecentRecipe = mSharedPreferences.getString(Constants.PREFERENCES_RECIPE_KEY, null);
+
+        if (mRecentRecipe != null) {
+            getRecipes(mRecentRecipe);
+        }
     }
 
     //overiding the onCreateOptionsMenu() and onOptionsItemSelected() methods
@@ -86,7 +94,7 @@ public class RecipeListActivity extends AppCompatActivity {
         //attach an dedicated listener-onQueryTextListener-to listen for changes in the search View
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-
+//runs when the user submits a query into the search view
             @Override
             public boolean onQueryTextSubmit(String query) {
                 addToSharedPreferences(query);
@@ -141,26 +149,13 @@ public class RecipeListActivity extends AppCompatActivity {
 
                     }
 
-//
-//
-//                    throws IOException {
-//                try{
-//                    //create new string-jsonData-and set it to the string of the response body
-//                    String jsonData=response.body().string();
-//                    //print data in the log cat and siplay error messages
-//                    Log.v(TAG,jsonData);
-//                    //trigger the process results method inside the recipesActivity on response method
-//                    //to collect its return value in a member variable called mRecipes
-//                }catch(IOException e){
-//                    e.printStackTrace();
-//
-//                }
-//
-//            }
                 });
             }
         });
     }
+
+
+
 }
 
 

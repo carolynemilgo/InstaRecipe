@@ -31,8 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //use butterknife to bind them
     @Bind(R.id.findRecipesButton)
     Button mFindRecipesButton;
-    @Bind(R.id.editTextView)
-    EditText mEditTextView;
+    @Bind(R.id.editTextView)   EditText mEditTextView;
     @Bind(R.id.welcomePage)
     ImageView mWelcomePage;
     @Bind(R.id.introMessage)
@@ -47,14 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private DatabaseReference mSearchedRecipeReference;
 
-    private ValueEventListener mSearchedRecipeReferenceListener;//
-    //private DatabaseReference FirebaseDatabase;
-
-    //private TextView mIntroMessage;
-    //private Button mFindRecipesButton;
-    //private ImageView mWelcomePage;
-    //private EditText mEditTextView;
-
+    private ValueEventListener mSearchedRecipeReferenceListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
