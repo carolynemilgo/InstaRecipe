@@ -1,4 +1,4 @@
-package com.example.carol.instarecipe;
+package com.example.carol.instarecipe.util;
 
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
