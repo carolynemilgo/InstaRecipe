@@ -3,9 +3,15 @@ package com.example.carol.instarecipe;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -61,19 +67,29 @@ public class RecipeListActivity extends AppCompatActivity {
         String recipes = enterRecipe.getStringExtra("recipes");
         mRecipeTextView.setText("Find all the dishes related to your search:" + recipes +" !");
 
-//implementing array adapters to allow display of the list items on the layout*Commented out: previously used on the hard coded array*
-//        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, recipeOptions);
-//        mListView.setAdapter(adapter);
-//        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                String restaurant = ((TextView) view).getText().toString();
-//                Toast.makeText(RecipeListActivity.this, restaurant, Toast.LENGTH_LONG).show();
-//            }
-//        });
         getRecipes(recipes);
     }
 
+    //overiding the onCreateOptionsMenu() and onOptionsItemSelected() methods
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_search, menu);
+        ButterKnife.bind(this);
+
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mEditor = mSharedPreferences.edit();
+
+        MenuItem menuItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
 
     //method to write data to shared preferences
     private void addToSharedPreferences(String recipe) {
@@ -107,19 +123,6 @@ public class RecipeListActivity extends AppCompatActivity {
                         mRecyclerView.setLayoutManager(layoutManager);
                         mRecyclerView.setHasFixedSize(true);
 
-//                        //create a list of names to allow user to view several options when enter a recipe name
-//                        String[] recipeNames = new String[mRecipes.size()];
-//                        for (int i = 0; i < recipeNames.length; i++) {
-//                            recipeNames[i] = mRecipes.get(i).getRecipeName();
-//                        }
-//                        //create an array adapter to pass data into the view
-//                        ArrayAdapter adapter = new ArrayAdapter(RecipeListActivity.this,
-//                                android.R.layout.simple_list_item_1, recipeNames);
-//                        mListView.setAdapter(adapter);
-//                        for(Recipe recipe: mRecipes){
-//                            Log.d(TAG, "recipeName:" + recipe.getRecipeName());
-//                            Log.d(TAG, "Ingredients:" + recipe.getIngredients().toString());
-//                        }
                     }
 
 //
