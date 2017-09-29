@@ -83,6 +83,22 @@ public class RecipeListActivity extends AppCompatActivity {
         MenuItem menuItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
 
+        //attach an dedicated listener-onQueryTextListener-to listen for changes in the search View
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                addToSharedPreferences(query);
+                getRecipes(query);
+                return false;
+            }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+
+        });
         return true;
     }
 
