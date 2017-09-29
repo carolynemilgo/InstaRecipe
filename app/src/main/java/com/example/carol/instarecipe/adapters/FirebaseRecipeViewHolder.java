@@ -29,7 +29,7 @@ import java.util.ArrayList;
 
 public class FirebaseRecipeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-
+    public ImageView mRecipeImageView;//varibale to hold the value for making the image view public
 
         private static final int MAX_WIDTH = 200;
         private static final int MAX_HEIGHT = 200;
@@ -45,13 +45,14 @@ public class FirebaseRecipeViewHolder extends RecyclerView.ViewHolder implements
     }
 
     public void bindRecipe(Recipe recipe){
+        mRecipeImageView = (ImageView) mView.findViewById(R.id.recipeImageView);
         ImageView recipeImageView = (ImageView) mView.findViewById(R.id.recipeImageView);
         TextView nameTextView = (TextView) mView.findViewById(R.id.recipeNameTextView);
         TextView prepTextView = (TextView) mView.findViewById(R.id.prepTimeTextView);
         TextView ratingTextView = (TextView) mView.findViewById(R.id.ratingTextView);
 
 
-        Picasso.with(mContext).load(recipe.getImageUrl()).resize(MAX_WIDTH,MAX_HEIGHT).centerCrop().into(recipeImageView);
+        Picasso.with(mContext).load(recipe.getImageUrl()).resize(MAX_WIDTH,MAX_HEIGHT).centerCrop().into(mRecipeImageView);
 
         nameTextView.setText(recipe.getRecipeName());
         prepTextView.setText(String.valueOf(recipe.getPrepTime()));
