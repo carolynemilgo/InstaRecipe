@@ -88,8 +88,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //
 //        TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "fonts/Raleway-ExtraLight.ttf"); // font from assets: "assets/fonts/Roboto-Regular.ttf
 
-
+//sent fonts for the buttons and the edit text views
         mFindRecipesButton.setTypeface(ralewayFont);
+        mSavedRecipesButton.setTypeface(ralewayFont);
+        mEditTextView.setTypeface(ralewayFont);
 
         //adding a toast to the main image on the home page using click listeners
         //mWelcomePage=(ImageView) findViewById(R.id.welcomePage);
