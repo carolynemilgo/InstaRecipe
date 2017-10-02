@@ -1,102 +1,97 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.carol.instarecipe.RecipeDetailFragment">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="180dp"
+        android:id="@+id/recipeImageView"
+        android:src="@drawable/nyam"
+        android:scaleType="centerCrop" />
 
-        <ImageView
+    <ScrollView
+        android:layout_below="@id/recipeImageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollrecipe">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:id="@+id/recipeImageView"
-            android:src="@drawable/nyam"
-            android:scaleType="centerCrop" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="1">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:paddingTop="20dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Recipe Name"
-                android:id="@+id/recipeNameTextView"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:textSize="20sp"
-                android:textColor="@color/colorPrimaryDark"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="4.5/5"
-                android:id="@+id/ratingTextView"
-                android:layout_alignTop="@+id/recipeNameTextView"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:textColor="@color/colorAccent"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/prepTimeTextView"
-                android:layout_below="@+id/recipeNameTextView"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:textColor="@color/colorAccent"
-                android:textStyle="italic" />
-
-                </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
-                android:orientation="vertical"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:paddingLeft="30dp"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
                 android:paddingTop="20dp"
-                android:paddingRight="30dp"
-                android:background="@color/colorWhite"
-                >
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="20dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="View on Yummly"
-                    android:id="@+id/websiteTextView"
-                    android:drawablePadding="4dp"
+                    android:text="Recipe Name"
+                    android:id="@+id/recipeNameTextView"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4.5/5"
+                    android:id="@+id/ratingTextView"
+                    android:layout_alignTop="@+id/recipeNameTextView"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
                     android:textColor="@color/colorAccent"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="center" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ingredients"
-                    android:textStyle="bold"
-                    android:drawablePadding="4dp"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:id="@+id/prepTimeTextView"
+                    android:layout_below="@+id/recipeNameTextView"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="italic" />
+
+            </RelativeLayout>
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="View on Yummly"
+                android:id="@+id/websiteTextView"
+                android:drawablePadding="4dp"
+                android:textColor="@color/colorAccent"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ingredients"
+                android:textStyle="bold"
+                android:drawablePadding="4dp"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -107,32 +102,22 @@
                     android:textSize="15sp"
                     />
 
-            </LinearLayout>
 
-            <!--<Button-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Save Restaurant"-->
-                <!--android:id="@+id/saveRestaurantButton"-->
-                <!--android:layout_alignParentBottom="true"-->
-                <!--android:background="@color/colorAccent"-->
-                <!--android:textColor="@color/colorTextIcons"-->
-                <!--android:textSize="15sp" />-->
+            </ScrollView>
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Add Recipe to Wishlist"
-                android:id="@+id/saveRecipeButton"
-                android:layout_alignParentBottom="true"
-                android:background="@color/colorAccent"
+        </LinearLayout>
+    </ScrollView>
 
-                android:textSize="15sp" />
-
-        </RelativeLayout>
-    </LinearLayout>
-</FrameLayout>
-
+    <Button
+        android:id="@+id/saveRecipeButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:text="Add Recipe to Wishlist"
+        android:layout_alignParentBottom="true"
+        android:textSize="15sp"
+        android:layout_weight="14.05" />
+</RelativeLayout>
 
 
 
